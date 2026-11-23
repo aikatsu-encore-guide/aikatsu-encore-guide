@@ -50,10 +50,11 @@ a { color: var(--accent); }
 }
 .site-header h1 {
   margin: 0 0 10px;
-  font-size: 1.35rem;
+  font-size: clamp(0.95rem, 4.4vw, 1.35rem);
   line-height: 1.45;
+  white-space: nowrap;
   font-family: "Hiragino Mincho ProN", "Hiragino Mincho", "Yu Mincho", YuMincho, serif;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   position: relative;
   z-index: 1;
 }

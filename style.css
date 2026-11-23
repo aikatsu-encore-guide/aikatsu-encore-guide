@@ -146,7 +146,7 @@ p { margin: 8px 0; }
   #prices .table-scroll td:nth-child(1) { order: 1; }
   #prices .table-scroll td:nth-child(3) { order: 2; flex: 1 1 auto; font-weight: 700; font-size: 1.05rem; }
   #prices .table-scroll td:nth-child(4) { order: 3; }
-  #prices .table-scroll td:nth-child(6) { order: 4; flex: 1 0 auto; font-size: 1.3rem; color: var(--accent-deep); text-align: left; }
+  #prices .table-scroll td:nth-child(6) { order: 4; flex: 1 0 calc(100% - 122px); font-size: 1.3rem; color: var(--accent-deep); text-align: left; }
   #prices .table-scroll td.spark { order: 5; margin-left: auto; background: #fdf6f3; border-radius: 8px; padding: 2px 6px; line-height: 0; }
   #prices .table-scroll tr.rank1 td.spark { background: #fff; }
   #prices .table-scroll td:nth-child(2) { order: 6; color: var(--muted); font-size: .76rem; }

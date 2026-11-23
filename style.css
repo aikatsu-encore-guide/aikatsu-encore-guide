@@ -260,6 +260,7 @@ td.change-none { color: var(--muted); white-space: nowrap; }
   gap: 10px;
   margin: 18px 0 8px;
 }
+@media (max-width: 360px) { .navtile { font-size: 0.72rem; } }
 @media (min-width: 700px) { .tilenav { grid-template-columns: repeat(4, 1fr); } }
 @media (min-width: 1000px) { .tilenav { grid-template-columns: repeat(6, 1fr); } }
 .navtile {
@@ -267,14 +268,15 @@ td.change-none { color: var(--muted); white-space: nowrap; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 16px 6px 13px;
+  gap: 6px;
+  padding: 14px 2px 11px;
   background: var(--surface);
   border: 2px solid var(--line);
   border-radius: 18px;
   color: var(--ink);
   font-weight: 700;
-  font-size: 0.92rem;
+  font-size: 0.8rem;
+  white-space: nowrap;
   text-align: center;
   text-decoration: none;
   box-shadow: 0 2px 6px rgba(163, 74, 109, 0.08);

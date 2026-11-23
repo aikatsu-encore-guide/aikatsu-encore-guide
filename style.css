@@ -118,6 +118,45 @@ p { margin: 8px 0; }
   font-size: 0.88rem;
 }
 .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+/* ===== トップ10表：スマホではカード表示にして横スクロールをなくす ===== */
+@media (max-width: 760px) {
+  #prices .table-scroll { overflow-x: visible; }
+  #prices .table-scroll table { min-width: 0; border-collapse: separate; border-spacing: 0; }
+  #prices .table-scroll thead { display: none; }
+  #prices .table-scroll tbody tr {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    column-gap: 10px;
+    row-gap: 3px;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface);
+    box-shadow: 0 2px 6px rgba(163, 74, 109, .08);
+    padding: 10px 12px;
+    margin-bottom: 10px;
+  }
+  #prices .table-scroll tbody tr.rank1 {
+    border-color: #e5c86e;
+    background: linear-gradient(135deg, #fdf6dd, #fbeec3);
+  }
+  #prices .table-scroll td { border: none; padding: 0; background: transparent; }
+  #prices .table-scroll td:nth-child(1) { grid-area: 1 / 1; }
+  #prices .table-scroll td:nth-child(3) { grid-area: 1 / 2; font-weight: 700; font-size: 1.02rem; }
+  #prices .table-scroll td:nth-child(4) { grid-area: 1 / 3; text-align: right; }
+  #prices .table-scroll td:nth-child(2) { grid-area: 2 / 1; color: var(--muted); font-size: .8rem; }
+  #prices .table-scroll td:nth-child(5) { grid-area: 2 / 2; color: var(--muted); font-size: .8rem; }
+  #prices .table-scroll td:nth-child(7) { grid-area: 2 / 3; color: var(--muted); font-size: .8rem; text-align: right; }
+  #prices .table-scroll td:nth-child(6) { grid-area: 3 / 1 / 3 / 3; font-size: 1.3rem; color: var(--accent-deep); text-align: left; }
+  #prices .table-scroll td.spark { grid-area: 3 / 3; text-align: right; }
+  #prices .table-scroll td:nth-child(8) { grid-area: 4 / 1; font-size: .85rem; }
+  #prices .table-scroll td:nth-child(8)::before { content: "前回比 "; color: var(--muted); font-size: .75rem; }
+  #prices .table-scroll td:nth-child(9) { grid-area: 4 / 2; font-size: .85rem; }
+  #prices .table-scroll td:nth-child(9)::before { content: "順位 "; color: var(--muted); font-size: .75rem; }
+  #prices .table-scroll td:last-child { grid-area: 4 / 3; font-size: .8rem; text-align: right; }
+  #prices .table-scroll td:nth-child(10) { grid-area: 5 / 1 / 5 / -1; font-size: .8rem; color: #8a6d1a; }
+  #prices .table-scroll td.note-none { display: none; }
+}
 table {
   border-collapse: collapse;
   width: 100%;

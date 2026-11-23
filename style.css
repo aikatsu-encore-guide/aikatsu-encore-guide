@@ -480,11 +480,11 @@ details.store-pref[open] > summary::after { content: "－ 閉じる"; }
 details.store-pref[open] { background: #fdf6f3; }
 
 /* ===== 都道府県タイルマップ ===== */
-.tilemap-wrap { margin: 14px 0 6px; }
+.tilemap-wrap { margin: 14px 0 6px; max-width: 100%; overflow: hidden; }
 .tilemap-lead { font-size: 0.9rem; margin: 6px 0 10px; }
 .tilemap {
   display: grid;
-  grid-template-columns: repeat(13, 1fr);
+  grid-template-columns: repeat(13, minmax(0, 1fr));
   gap: 4px;
   max-width: 640px;
   margin: 0 auto;

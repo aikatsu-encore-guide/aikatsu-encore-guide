@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aikatsu-encore-guide.330-t.workers.dev/sitemap.xml

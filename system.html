@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>配列の仕組み｜アイカツ！アンコール 相場・資産チェック</title>
+<meta name="description" content="データカードダス「アイカツ！アンコール」のカード排出（配列）の仕組みについて、非公式情報にもとづく説明をまとめた個人運営のファンサイトです。公式サイトではありません。">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#c05a7e">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="アイカツ相場">
+
+</head>
+<body>
+<header class="site-header">
+  <h1><a href="index.html" style="color:inherit;text-decoration:none;">アイカツ！アンコール<br>相場・資産チェック</a></h1>
+  <p>個人が運営するファンサイトです。バンダイ／バンダイナムコグループおよび関係各社の公式サイトではありません。</p>
+</header>
+<nav class="chipnav" aria-label="ページ移動">
+  <a class="chip" href="index.html#prices">相場トップ10</a>
+  <a class="chip" href="allprices.html">全カード相場</a>
+  <a class="chip" href="cards.html">カードリスト</a>
+  <a class="chip" href="stores.html">設置店</a>
+  <a class="chip" href="promo.html">プロモ情報</a>
+</nav>
+<div class="wrap">
+<p class="note"><a href="index.html">← トップページへ戻る</a></p>
+<section id="system">
+  <h2><svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v3M12 18.2v3M2.8 12h3M18.2 12h3M5.5 5.5l2.1 2.1M16.4 16.4l2.1 2.1M18.5 5.5l-2.1 2.1M7.6 16.4l-2.1 2.1"/></svg>配列の仕組みについて</h2>
+  <p>要点：カードは固定パック方式でセットされ、左右2つのシリンダーから交互に排出されると説明されています（非公式情報にもとづく説明です）。</p>
+  <details class="more"><summary>詳しく見る</summary>
+  <p>「アイカツ！アンコール」の筐体からカードが出てくる仕組みとして、一般に次のように説明されています。</p>
+  <ul class="plain">
+    <li><strong>固定パック方式</strong>：カードはあらかじめ決まった順序のパック（束）として筐体にセットされ、その順番どおりに排出されます。</li>
+    <li><strong>左右シリンダー交互排出</strong>：筐体内部の左右2つのシリンダー（カードの収納部）から、交互にカードが排出される仕組みとされています。</li>
+  </ul>
+  <div class="caution">
+    上記の仕組みは非公式情報にもとづく説明であり、<strong>公式発表ではありません</strong>。また、具体的なカードの並び順（配列）は公式に公開されていないため、このサイトでは並び順の表は掲載していません。
+  </div>
+  </details>
+</section>
+
+</div>
+
+<script>
+(function () {
+  var input = document.getElementById('card-search');
+  var select = document.getElementById('rarity-filter');
+  var count = document.getElementById('card-count');
+  var rows = Array.prototype.slice.call(document.querySelectorAll('.card-table tbody tr'));
+  function apply() {
+    var q = (input.value || '').trim().toLowerCase();
+    var r = select.value;
+    var shown = 0;
+    rows.forEach(function (row) {
+      var okQ = !q || row.getAttribute('data-name').toLowerCase().indexOf(q) !== -1;
+      var okR = !r || row.getAttribute('data-rarity') === r;
+      var show = okQ && okR;
+      row.style.display = show ? '' : 'none';
+      if (show) shown++;
+    });
+    count.textContent = '表示中：' + shown + '枚 / 全' + rows.length + '枚';
+  }
+  input.addEventListener('input', apply);
+  select.addEventListener('change', apply);
+  apply();
+})();
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('sw.js').catch(function () {});
+  });
+}
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "83d44852b7134fafa72f79f48e3f3325"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

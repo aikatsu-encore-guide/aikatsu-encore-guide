@@ -1,8 +1,8 @@
-/* アイカツ！アンコール 相場・設置店ガイド Service Worker
+/* アイカツ！アンコール 相場と資産チェック Service Worker
    方針: ページ(HTML)はネットワーク優先（相場の更新を確実に表示）、
    CSS・アイコン等の静的ファイルはキャッシュ優先で高速化する。
    取得に失敗しても通常のネットワーク表示にフォールバックし、サイトを壊さない。 */
-var CACHE_NAME = 'aikatsu-guide-v4';
+var CACHE_NAME = 'aikatsu-guide-v5';
 var PRECACHE = [
   './',
   './cards',

@@ -7,7 +7,7 @@
 <meta name="description" content="データカードダス「アイカツ！アンコール」の相場（第1弾、メルカリ・楽天ラクマ合算）、カードリスト、プロモ配布情報、全国の設置店をまとめた個人運営のファンサイトです。公式サイトではありません。">
 <link rel="stylesheet" href="style.css">
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#d6336c">
+<meta name="theme-color" content="#c05a7e">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -2065,12 +2065,12 @@ var PRICE_HISTORY = [
       });
       var line = pts.map(function (p) { return p.x.toFixed(1) + ',' + p.y.toFixed(1); }).join(' ');
       var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + topName + 'の価格推移グラフ">'
-        + '<defs><linearGradient id="fcGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d6336c" stop-opacity="0.28"/><stop offset="100%" stop-color="#d6336c" stop-opacity="0.02"/></linearGradient></defs>'
+        + '<defs><linearGradient id="fcGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#c05a7e" stop-opacity="0.28"/><stop offset="100%" stop-color="#c05a7e" stop-opacity="0.02"/></linearGradient></defs>'
         + grid
         + '<path d="' + areaPath(pts, baseY) + '" fill="url(#fcGrad)"/>'
-        + '<polyline fill="none" stroke="#d6336c" stroke-width="2.5" points="' + line + '"/>'
-        + pts.map(function (p) { return '<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="4" fill="#ffffff" stroke="#d6336c" stroke-width="2"><title>' + p.date + '：' + p.price.toLocaleString() + '円</title></circle>'
-          + '<text x="' + p.x.toFixed(1) + '" y="' + (p.y - 10) + '" font-size="12" font-weight="700" fill="#a61e4d" text-anchor="middle">' + p.price.toLocaleString() + '</text>'; }).join('')
+        + '<polyline fill="none" stroke="#c05a7e" stroke-width="2.5" points="' + line + '"/>'
+        + pts.map(function (p) { return '<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="4" fill="#ffffff" stroke="#c05a7e" stroke-width="2"><title>' + p.date + '：' + p.price.toLocaleString() + '円</title></circle>'
+          + '<text x="' + p.x.toFixed(1) + '" y="' + (p.y - 10) + '" font-size="12" font-weight="700" fill="#a34a6d" text-anchor="middle">' + p.price.toLocaleString() + '</text>'; }).join('')
         + '<text x="' + PL + '" y="' + (H - 8) + '" font-size="11" fill="#6f6472">' + pts[0].date + '</text>'
         + '<text x="' + (W - PR) + '" y="' + (H - 8) + '" font-size="11" fill="#6f6472" text-anchor="end">' + pts[pts.length - 1].date + '</text>'
         + '</svg>';
@@ -2102,7 +2102,7 @@ var PRICE_HISTORY = [
         var W2 = 96, H2 = 28, pts2 = scale(s2, W2, H2, 2, 2, 4, 4);
         var line2 = pts2.map(function (p) { return p.x.toFixed(1) + ',' + p.y.toFixed(1); }).join(' ');
         var lp = pts2[pts2.length - 1];
-        td.innerHTML = '<svg viewBox="0 0 ' + W2 + ' ' + H2 + '" width="96" height="28" role="img" aria-label="' + key + 'の価格推移"><path d="' + areaPath(pts2, H2 - 2) + '" fill="#d6336c" opacity="0.12"/><polyline fill="none" stroke="#d6336c" stroke-width="1.6" points="' + line2 + '"/><circle cx="' + lp.x.toFixed(1) + '" cy="' + lp.y.toFixed(1) + '" r="2.4" fill="#d6336c"/></svg>';
+        td.innerHTML = '<svg viewBox="0 0 ' + W2 + ' ' + H2 + '" width="96" height="28" role="img" aria-label="' + key + 'の価格推移"><path d="' + areaPath(pts2, H2 - 2) + '" fill="#c05a7e" opacity="0.12"/><polyline fill="none" stroke="#c05a7e" stroke-width="1.6" points="' + line2 + '"/><circle cx="' + lp.x.toFixed(1) + '" cy="' + lp.y.toFixed(1) + '" r="2.4" fill="#c05a7e"/></svg>';
       } else {
         td.textContent = '―';
       }
@@ -2119,9 +2119,9 @@ var PRICE_HISTORY = [
       var pts = scale(series, W, H, PL, PR, PT, PB);
       var line = pts.map(function (p) { return p.x.toFixed(1) + ',' + p.y.toFixed(1); }).join(' ');
       var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + name + 'の価格推移">'
-        + '<path d="' + areaPath(pts, H - PB) + '" fill="#d6336c" opacity="0.12"/>'
-        + '<polyline fill="none" stroke="#d6336c" stroke-width="2" points="' + line + '"/>'
-        + pts.map(function (p) { return '<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="3" fill="#d6336c"><title>' + p.date + '：' + p.price.toLocaleString() + '円</title></circle>'; }).join('')
+        + '<path d="' + areaPath(pts, H - PB) + '" fill="#c05a7e" opacity="0.12"/>'
+        + '<polyline fill="none" stroke="#c05a7e" stroke-width="2" points="' + line + '"/>'
+        + pts.map(function (p) { return '<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="3" fill="#c05a7e"><title>' + p.date + '：' + p.price.toLocaleString() + '円</title></circle>'; }).join('')
         + '<text x="' + PL + '" y="' + (H - 3) + '" font-size="9" fill="#6f6472">' + pts[0].date + '</text>'
         + '<text x="' + (W - PR) + '" y="' + (H - 3) + '" font-size="9" fill="#6f6472" text-anchor="end">' + pts[pts.length - 1].date + '</text>'
         + '</svg>';

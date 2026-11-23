@@ -1,13 +1,15 @@
 /* アイカツ！アンコール 相場・設置店ガイド（公開版・全国版） - 共通スタイル
    外部フォント・外部画像は使用しない。システムフォントのみ。 */
 :root {
-  --bg: #fff7fa;
+  --bg: #fbf7f5;
   --surface: #ffffff;
-  --ink: #2b2230;
-  --muted: #6f6472;
-  --accent: #d6336c;
-  --accent-soft: #fdeef4;
-  --line: #ecdde4;
+  --ink: #43323c;
+  --muted: #97828c;
+  --accent: #c05a7e;
+  --accent-deep: #a34a6d;
+  --accent-soft: #f7e8ec;
+  --line: #ecdde2;
+  --gold: #c9a24b;
   --warn-bg: #fff6e0;
   --warn-line: #e8cf8a;
 }
@@ -19,21 +21,43 @@ body {
   color: var(--ink);
   font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", YuGothic,
     "Noto Sans JP", "Meiryo", sans-serif;
-  line-height: 1.7;
+  line-height: 1.75;
   font-size: 16px;
 }
 a { color: var(--accent); }
 .site-header {
-  background: var(--accent);
+  background: linear-gradient(120deg, var(--accent-deep), var(--accent) 55%, #d18aa5);
   color: #fff;
-  padding: 20px 16px 16px;
+  padding: 26px 16px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.site-header::before {
+  content: "✦";
+  position: absolute;
+  right: 20px;
+  top: 8px;
+  font-size: 22px;
+  opacity: 0.7;
+}
+.site-header::after {
+  content: "✦";
+  position: absolute;
+  right: 72px;
+  bottom: 6px;
+  font-size: 13px;
+  opacity: 0.5;
 }
 .site-header h1 {
   margin: 0 0 6px;
   font-size: 1.35rem;
   line-height: 1.4;
+  font-family: "Hiragino Mincho ProN", "Hiragino Mincho", "Yu Mincho", YuMincho, serif;
+  letter-spacing: 0.05em;
+  position: relative;
+  z-index: 1;
 }
-.site-header p { margin: 0; font-size: 0.85rem; opacity: 0.95; }
+.site-header p { margin: 0; font-size: 0.85rem; opacity: 0.95; position: relative; z-index: 1; }
 .wrap { max-width: 960px; margin: 0 auto; padding: 0 12px 40px; }
 nav.toc {
   background: var(--surface);
@@ -47,15 +71,17 @@ nav.toc ul { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: 
 section {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 16px;
-  margin: 16px 0;
+  border-radius: 14px;
+  padding: 18px;
+  margin: 18px 0;
+  box-shadow: 0 2px 10px rgba(163, 74, 109, 0.05);
 }
 h2 {
   font-size: 1.15rem;
   margin: 0 0 10px;
   padding-bottom: 6px;
   border-bottom: 2px solid var(--accent-soft);
+  letter-spacing: 0.04em;
 }
 h3 { font-size: 1rem; margin: 18px 0 8px; }
 p { margin: 8px 0; }
@@ -94,7 +120,7 @@ th, td {
 th { background: var(--accent-soft); white-space: nowrap; }
 td.num, td.price { white-space: nowrap; }
 td.price { text-align: right; font-weight: 700; }
-tr:nth-child(even) td { background: #fffafc; }
+tr:nth-child(even) td { background: #fdf6f3; }
 .filters {
   display: flex;
   flex-wrap: wrap;
@@ -157,12 +183,13 @@ footer.site-footer h2 { border: none; font-size: 1rem; color: var(--ink); }
 
 /* ===== 相場トップ10のフィーチャー表示（1位） ===== */
 .feature-card {
-  border: 2px solid #e3c964;
-  background: linear-gradient(180deg, #fffbe8, #fff7fa);
-  border-radius: 12px;
-  padding: 16px;
+  border: 2px solid #e5c86e;
+  background: linear-gradient(180deg, #fffdf4, #fdf3f0);
+  border-radius: 16px;
+  padding: 18px 16px;
   margin: 12px 0 16px;
   text-align: center;
+  box-shadow: 0 4px 14px rgba(163, 74, 109, 0.10);
 }
 .feature-card .feature-rank {
   font-size: 0.9rem;
@@ -232,15 +259,22 @@ td.change-none { color: var(--muted); white-space: nowrap; }
   padding: 16px 6px 13px;
   background: var(--surface);
   border: 2px solid var(--line);
-  border-radius: 16px;
+  border-radius: 18px;
   color: var(--ink);
   font-weight: 700;
   font-size: 0.92rem;
   text-align: center;
   text-decoration: none;
-  box-shadow: 0 2px 6px rgba(214, 51, 108, 0.08);
+  box-shadow: 0 2px 6px rgba(163, 74, 109, 0.08);
 }
-.navtile svg { width: 28px; height: 28px; color: var(--accent); }
+.navtile svg {
+  width: 42px;
+  height: 42px;
+  padding: 9px;
+  background: var(--accent-soft);
+  border-radius: 50%;
+  color: var(--accent);
+}
 .navtile:hover, .navtile:active { background: var(--accent-soft); border-color: var(--accent); }
 section, footer.site-footer { scroll-margin-top: 16px; }
 
@@ -259,7 +293,7 @@ details.more {
   border-radius: 8px;
   padding: 8px 12px;
   margin: 10px 0;
-  background: #fffafc;
+  background: #fdf6f3;
 }
 details.more > summary {
   cursor: pointer;
@@ -294,7 +328,7 @@ details.store-pref {
   padding: 4px 12px 8px;
   margin-top: 10px;
   background: var(--surface);
-  scroll-margin-top: 64px;
+  scroll-margin-top: 16px;
 }
 details.store-pref > summary {
   cursor: pointer;
@@ -316,7 +350,7 @@ details.store-pref > summary::after {
   color: var(--accent);
 }
 details.store-pref[open] > summary::after { content: "－ 閉じる"; }
-details.store-pref[open] { background: #fffafc; }
+details.store-pref[open] { background: #fdf6f3; }
 
 /* ===== 都道府県タイルマップ ===== */
 .tilemap-wrap { margin: 14px 0 6px; }
@@ -330,7 +364,7 @@ details.store-pref[open] { background: #fffafc; }
 }
 .tile {
   aspect-ratio: 1 / 1;
-  border: 1px solid rgba(43, 34, 48, 0.18);
+  border: 1px solid rgba(67, 50, 60, 0.18);
   border-radius: 6px;
   display: flex;
   flex-direction: column;
@@ -370,7 +404,7 @@ details.store-pref[open] { background: #fffafc; }
   width: 12px;
   height: 12px;
   border-radius: 3px;
-  border: 1px solid rgba(43, 34, 48, 0.18);
+  border: 1px solid rgba(67, 50, 60, 0.18);
   vertical-align: -1px;
   margin-right: 4px;
 }

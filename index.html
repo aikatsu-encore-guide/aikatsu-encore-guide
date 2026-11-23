@@ -2154,38 +2154,122 @@ var PRICE_HISTORY = [
   { date: '2026-11-23 12時', prices: { 'E1-30 オデットスワン': 38472, 'E1-04 オーロラキスリボン': 12277, 'E1-01 オーロラキスキャミソール': 11266, 'E1-02 オーロラキスドレープスカート': 11100, 'E1-03 オーロラキスバレエシューズ': 9250, 'E1-50 ドリームエミネンス': 7163, 'E1-32 オーロラペガサス': 6998, 'E1-31 リルリボンストーリー': 6950, 'E1-33 天の川コズミックワンショルダー': 5212, 'E1-36 天の川コズミックカチューシャ': 5013 } }
 ];
 (function () {
-  var grid = document.getElementById('chart-grid');
-  if (!grid || PRICE_HISTORY.length < 2) return; // 2回分たまるまでは「データ蓄積中」の表示のみ
+  if (PRICE_HISTORY.length < 2) return; // 2回分たまるまでは「データ蓄積中」の表示のみ
   var latest = PRICE_HISTORY[PRICE_HISTORY.length - 1];
-  Object.keys(latest.prices).forEach(function (name) {
-    var series = [];
+  function seriesOf(name) {
+    var s = [];
     PRICE_HISTORY.forEach(function (h) {
-      if (typeof h.prices[name] === 'number') series.push({ date: h.date, price: h.prices[name] });
+      if (typeof h.prices[name] === 'number') s.push({ date: h.date, price: h.prices[name] });
     });
-    if (series.length < 2) return;
-    var W = 260, H = 96, PL = 6, PR = 6, PT = 10, PB = 16;
+    return s;
+  }
+  function scale(series, W, H, PL, PR, PT, PB) {
     var prices = series.map(function (s) { return s.price; });
     var min = Math.min.apply(null, prices), max = Math.max.apply(null, prices);
     if (min === max) { min = min * 0.95; max = max * 1.05; }
-    var pts = series.map(function (s, i) {
+    return series.map(function (s, i) {
       var x = PL + (W - PL - PR) * (series.length === 1 ? 0.5 : i / (series.length - 1));
       var y = PT + (H - PT - PB) * (1 - (s.price - min) / (max - min));
       return { x: x, y: y, date: s.date, price: s.price };
     });
-    var line = pts.map(function (p) { return p.x.toFixed(1) + ',' + p.y.toFixed(1); }).join(' ');
-    var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + name + 'の価格推移">'
-      + '<polyline fill="none" stroke="#d6336c" stroke-width="2" points="' + line + '"/>'
-      + pts.map(function (p) { return '<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="3" fill="#d6336c"><title>' + p.date + '：' + p.price.toLocaleString() + '円</title></circle>'; }).join('')
-      + '<text x="' + PL + '" y="' + (H - 3) + '" font-size="9" fill="#6f6472">' + pts[0].date + '</text>'
-      + '<text x="' + (W - PR) + '" y="' + (H - 3) + '" font-size="9" fill="#6f6472" text-anchor="end">' + pts[pts.length - 1].date + '</text>'
-      + '</svg>';
-    var box = document.createElement('div');
-    box.className = 'chart-box';
-    box.innerHTML = '<h4>' + name + '</h4><div class="chart-latest">' + latest.prices[name].toLocaleString() + '円</div>' + svg;
-    grid.appendChild(box);
-  });
-  var acc = document.querySelector('.chart-accumulating');
-  if (acc && grid.children.length) acc.style.display = 'none';
+  }
+  function areaPath(pts, baseY) {
+    var d = 'M' + pts[0].x.toFixed(1) + ',' + baseY;
+    pts.forEach(function (p) { d += ' L' + p.x.toFixed(1) + ',' + p.y.toFixed(1); });
+    d += ' L' + pts[pts.length - 1].x.toFixed(1) + ',' + baseY + ' Z';
+    return d;
+  }
+  // ---- 1位の大グラフ（フィーチャーカードの直後に挿入） ----
+  var names = Object.keys(latest.prices);
+  var topName = names[0];
+  names.forEach(function (n) { if (latest.prices[n] > latest.prices[topName]) topName = n; });
+  var fc = document.querySelector('.feature-card');
+  if (fc && topName) {
+    var s = seriesOf(topName);
+    if (s.length >= 2) {
+      var W = 720, H = 240, PL = 64, PR = 16, PT = 26, PB = 30;
+      var pts = scale(s, W, H, PL, PR, PT, PB);
+      var prices = s.map(function (v) { return v.price; });
+      var mn = Math.min.apply(null, prices), mx = Math.max.apply(null, prices);
+      var dmin = (mn === mx) ? mn * 0.95 : mn, dmax = (mn === mx) ? mx * 1.05 : mx;
+      var baseY = H - PB;
+      var grid = '';
+      [0, 0.5, 1].forEach(function (t) {
+        var gy = PT + (H - PT - PB) * t;
+        var val = Math.round(dmax - (dmax - dmin) * t);
+        grid += '<line x1="' + PL + '" y1="' + gy + '" x2="' + (W - PR) + '" y2="' + gy + '" stroke="#eeeeee" stroke-width="1"/>'
+          + '<text x="' + (PL - 6) + '" y="' + (gy + 4) + '" font-size="11" fill="#6f6472" text-anchor="end">' + val.toLocaleString() + '</text>';
+      });
+      var line = pts.map(function (p) { return p.x.toFixed(1) + ',' + p.y.toFixed(1); }).join(' ');
+      var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + topName + 'の価格推移グラフ">'
+        + '<defs><linearGradient id="fcGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d6336c" stop-opacity="0.28"/><stop offset="100%" stop-color="#d6336c" stop-opacity="0.02"/></linearGradient></defs>'
+        + grid
+        + '<path d="' + areaPath(pts, baseY) + '" fill="url(#fcGrad)"/>'
+        + '<polyline fill="none" stroke="#d6336c" stroke-width="2.5" points="' + line + '"/>'
+        + pts.map(function (p) { return '<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="4" fill="#ffffff" stroke="#d6336c" stroke-width="2"><title>' + p.date + '：' + p.price.toLocaleString() + '円</title></circle>'
+          + '<text x="' + p.x.toFixed(1) + '" y="' + (p.y - 10) + '" font-size="12" font-weight="700" fill="#a61e4d" text-anchor="middle">' + p.price.toLocaleString() + '</text>'; }).join('')
+        + '<text x="' + PL + '" y="' + (H - 8) + '" font-size="11" fill="#6f6472">' + pts[0].date + '</text>'
+        + '<text x="' + (W - PR) + '" y="' + (H - 8) + '" font-size="11" fill="#6f6472" text-anchor="end">' + pts[pts.length - 1].date + '</text>'
+        + '</svg>';
+      var diff = prices[prices.length - 1] - prices[0];
+      var diffTxt = (diff > 0 ? '+' : (diff < 0 ? '−' : '±')) + Math.abs(diff).toLocaleString() + '円';
+      var box = document.createElement('div');
+      box.className = 'feature-chart';
+      box.innerHTML = '<h3>' + topName + ' の価格推移</h3><div class="fc-sub">集計開始からの平均価格の推移（' + s.length + '回分）／初回比 ' + diffTxt + '</div>' + svg;
+      fc.parentNode.insertBefore(box, fc.nextSibling);
+    }
+  }
+  // ---- トップ10表のミニグラフ列 ----
+  var table = document.querySelector('#prices .table-scroll table');
+  if (table) {
+    var headRow = table.querySelector('thead tr');
+    if (headRow) {
+      var th = document.createElement('th');
+      th.textContent = '推移';
+      headRow.insertBefore(th, headRow.children[headRow.children.length - 1]);
+    }
+    Array.prototype.forEach.call(table.querySelectorAll('tbody tr'), function (row) {
+      var code = row.children[1] ? row.children[1].textContent.trim() : '';
+      var nm = row.children[2] ? row.children[2].textContent.trim() : '';
+      var key = code + ' ' + nm;
+      var td = document.createElement('td');
+      td.className = 'spark';
+      var s2 = seriesOf(key);
+      if (s2.length >= 2) {
+        var W2 = 96, H2 = 28, pts2 = scale(s2, W2, H2, 2, 2, 4, 4);
+        var line2 = pts2.map(function (p) { return p.x.toFixed(1) + ',' + p.y.toFixed(1); }).join(' ');
+        var lp = pts2[pts2.length - 1];
+        td.innerHTML = '<svg viewBox="0 0 ' + W2 + ' ' + H2 + '" width="96" height="28" role="img" aria-label="' + key + 'の価格推移"><path d="' + areaPath(pts2, H2 - 2) + '" fill="#d6336c" opacity="0.12"/><polyline fill="none" stroke="#d6336c" stroke-width="1.6" points="' + line2 + '"/><circle cx="' + lp.x.toFixed(1) + '" cy="' + lp.y.toFixed(1) + '" r="2.4" fill="#d6336c"/></svg>';
+      } else {
+        td.textContent = '―';
+      }
+      row.insertBefore(td, row.children[row.children.length - 1]);
+    });
+  }
+  // ---- カード別グラフ（グリッド、面グラフ化） ----
+  var grid = document.getElementById('chart-grid');
+  if (grid) {
+    Object.keys(latest.prices).forEach(function (name) {
+      var series = seriesOf(name);
+      if (series.length < 2) return;
+      var W = 260, H = 96, PL = 6, PR = 6, PT = 10, PB = 16;
+      var pts = scale(series, W, H, PL, PR, PT, PB);
+      var line = pts.map(function (p) { return p.x.toFixed(1) + ',' + p.y.toFixed(1); }).join(' ');
+      var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + name + 'の価格推移">'
+        + '<path d="' + areaPath(pts, H - PB) + '" fill="#d6336c" opacity="0.12"/>'
+        + '<polyline fill="none" stroke="#d6336c" stroke-width="2" points="' + line + '"/>'
+        + pts.map(function (p) { return '<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="3" fill="#d6336c"><title>' + p.date + '：' + p.price.toLocaleString() + '円</title></circle>'; }).join('')
+        + '<text x="' + PL + '" y="' + (H - 3) + '" font-size="9" fill="#6f6472">' + pts[0].date + '</text>'
+        + '<text x="' + (W - PR) + '" y="' + (H - 3) + '" font-size="9" fill="#6f6472" text-anchor="end">' + pts[pts.length - 1].date + '</text>'
+        + '</svg>';
+      var box = document.createElement('div');
+      box.className = 'chart-box';
+      box.innerHTML = '<h4>' + name + '</h4><div class="chart-latest">' + latest.prices[name].toLocaleString() + '円</div>' + svg;
+      grid.appendChild(box);
+    });
+    var acc = document.querySelector('.chart-accumulating');
+    if (acc && grid.children.length) acc.style.display = 'none';
+  }
 })();
 </script>
 <script>

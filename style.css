@@ -380,3 +380,11 @@ details.store-pref[open] { background: #fffafc; }
   .tile-count { font-size: 0.62rem; }
   .tilemap { gap: 3px; }
 }
+
+/* グラフ強化（2026-11-23追加）：1位の大グラフとトップ10表のミニグラフ */
+.feature-chart { margin: 14px 0 6px; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+.feature-chart h3 { margin: 0 0 2px; font-size: 1rem; }
+.feature-chart .fc-sub { color: var(--muted); font-size: 0.85rem; margin-bottom: 6px; }
+.feature-chart svg { width: 100%; height: auto; display: block; }
+td.spark { min-width: 104px; }
+td.spark svg { display: block; }

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>カードの取り扱い・保管ガイド｜アイカツ！アンコール 相場・設置店ガイド</title>
+<meta name="description" content="アイカツ！アンコールのカードを傷つけずに取り出し、保管するためのガイド。白欠け・スレなどの傷が買取価格にどう影響するかも図解で説明します。">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#d6336c">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="アイカツ相場">
+<style>
+.pin { fill: #d6336c; }
+.pin-text { fill: #fff; font-weight: 800; font-size: 15px; text-anchor: middle; }
+.cardface { fill: #fff; stroke: #c9a7b8; stroke-width: 2; }
+.cardinner { fill: #fdeef4; }
+.cardline { stroke: #e3b7c9; stroke-width: 2; }
+.hotspot { fill: rgba(214,51,108,0.20); stroke: #d6336c; stroke-width: 1.5; stroke-dasharray: 5 4; }
+.diagram-wrap { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; margin: 12px 0; }
+.diagram-box { text-align: center; }
+.diagram-box .cap { font-weight: 700; margin-top: 6px; }
+.legend { max-width: 640px; margin: 0 auto; }
+.legend li { margin: 6px 0; }
+.legend .num { display: inline-block; background: #d6336c; color: #fff; border-radius: 50%; width: 1.6em; height: 1.6em; line-height: 1.6em; text-align: center; font-weight: 800; margin-right: 6px; }
+.steps { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin: 12px 0; }
+.step { background: var(--surface); border: 2px solid var(--line); border-radius: 14px; padding: 16px; }
+.step .no { display: inline-block; background: var(--accent); color: #fff; font-weight: 800; border-radius: 999px; padding: 2px 14px; margin-bottom: 8px; }
+.step h3 { margin: 4px 0 6px; font-size: 1.05em; }
+.rank-row { display: grid; grid-template-columns: 5.5em 1fr 6.5em; align-items: center; gap: 10px; margin: 8px 0; }
+.rank-name { font-weight: 800; }
+.rank-bar { background: #f3e2ea; border-radius: 999px; height: 22px; position: relative; overflow: hidden; }
+.rank-fill { position: absolute; top: 0; bottom: 0; left: 0; background: var(--accent); border-radius: 999px; }
+.rank-fill.light { background: rgba(214,51,108,0.35); }
+.rank-val { font-weight: 700; color: var(--accent); white-space: nowrap; }
+.layers { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; justify-content: center; margin: 14px 0; }
+.layer { border: 2px solid var(--accent); border-radius: 12px; padding: 12px 14px; text-align: center; background: #fff; min-width: 130px; }
+.layer b { display: block; }
+.layer span { color: var(--muted); font-size: 0.85em; }
+.arrow { font-size: 1.4em; color: var(--accent); font-weight: 800; }
+.ng-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin: 12px 0; }
+.ng-card { border-radius: 14px; padding: 14px 16px; border: 2px solid var(--line); background: var(--surface); }
+.ng-card .bad { color: #b02a52; font-weight: 800; }
+.ng-card .good { color: #1d7a4f; font-weight: 800; }
+.env-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin: 12px 0; text-align: center; }
+.env-card { border: 2px solid var(--line); border-radius: 14px; padding: 14px 10px; background: var(--surface); }
+.env-card .icon { font-size: 2em; display: block; margin-bottom: 6px; }
+.env-card b { display: block; }
+.env-card span { color: var(--muted); font-size: 0.85em; }
+</style>
+</head>
+<body>
+<header class="site-header">
+<h1>カードの取り扱い・保管ガイド</h1>
+<p>傷ひとつで買取価格は大きく変わります。まず防ぐことが一番の節約です</p>
+</header>
+<div class="wrap">
+
+<p><a href="index.html">トップページへ戻る</a></p>
+
+<section id="damage">
+<h2>傷はどこにつく？</h2>
+<p>査定で見られるのは、主にこの4か所です。特に裏面は色が濃いため、白欠けやスレが目立ちやすく、真っ先にチェックされます。</p>
+<div class="diagram-wrap">
+  <div class="diagram-box">
+    <svg width="220" height="310" viewBox="0 0 220 310" role="img" aria-label="カード表面の傷がつきやすい場所">
+      <rect class="cardface" x="10" y="10" width="200" height="290" rx="14"/>
+      <rect class="cardinner" x="26" y="26" width="168" height="150" rx="10"/>
+      <line class="cardline" x1="26" y1="200" x2="194" y2="200"/>
+      <line class="cardline" x1="26" y1="228" x2="194" y2="228"/>
+      <line class="cardline" x1="26" y1="256" x2="150" y2="256"/>
+      <circle class="hotspot" cx="22" cy="22" r="16"/>
+      <circle class="hotspot" cx="198" cy="288" r="16"/>
+      <rect class="hotspot" x="60" y="6" width="100" height="14" rx="6"/>
+      <rect class="hotspot" x="70" y="90" width="80" height="34" rx="8"/>
+      <circle class="pin" cx="22" cy="22" r="13"/><text class="pin-text" x="22" y="27">1</text>
+      <circle class="pin" cx="110" cy="13" r="13"/><text class="pin-text" x="110" y="18">2</text>
+      <circle class="pin" cx="110" cy="107" r="13"/><text class="pin-text" x="110" y="112">3</text>
+    </svg>
+    <div class="cap">表面（おもて）</div>
+  </div>
+  <div class="diagram-box">
+    <svg width="220" height="310" viewBox="0 0 220 310" role="img" aria-label="カード裏面の傷がつきやすい場所">
+      <rect class="cardface" x="10" y="10" width="200" height="290" rx="14" style="fill:#f7e8ef"/>
+      <circle class="cardinner" cx="110" cy="155" r="58"/>
+      <circle class="hotspot" cx="22" cy="288" r="16"/>
+      <circle class="hotspot" cx="198" cy="22" r="16"/>
+      <rect class="hotspot" x="6" y="90" width="14" height="130" rx="6"/>
+      <rect class="hotspot" x="55" y="120" width="110" height="70" rx="10"/>
+      <circle class="pin" cx="22" cy="288" r="13"/><text class="pin-text" x="22" y="293">1</text>
+      <circle class="pin" cx="13" cy="155" r="13"/><text class="pin-text" x="13" y="160">2</text>
+      <circle class="pin" cx="110" cy="155" r="13"/><text class="pin-text" x="110" y="160">4</text>
+    </svg>
+    <div class="cap">裏面（うら）</div>
+  </div>
+</div>
+<ul class="legend plain">
+  <li><span class="num">1</span><strong>角の白欠け</strong>：角や縁の印刷がはがれて白い下地が見える状態。カード同士の接触や落下で起き、最も多い傷です。</li>
+  <li><span class="num">2</span><strong>縁（ふち）のスレ</strong>：縁全体が擦れて白っぽくなる状態。スリーブへの出し入れでも少しずつ進みます。</li>
+  <li><span class="num">3</span><strong>表面の線傷・スレ</strong>：硬い面に置いたり、擦れたりしてできる細かい傷。キラ加工（パラレル版）は光の反射で特に目立ちます。</li>
+  <li><span class="num">4</span><strong>裏面のスレ</strong>：裏面全体の擦り傷。机の上に直置きして滑らせるだけでもつきます。</li>
+</ul>
+</section>
+
+<section id="takeout">
+<h2>取り出し口が最初の難関</h2>
+<p>データカードダスのカードは、排出の瞬間が一番傷つきやすい場面です。取り出し口の中でカード同士が重なり、縁や角が擦れた状態で出てくることがあるため、受け取り方で差がつきます。</p>
+<div class="steps">
+  <div class="step"><span class="no">STEP 1</span><h3>ゆっくり、1枚ずつ</h3><p>まとめて引っ張り出すと、カード同士が擦れて縁にスレが入ります。焦らず1枚ずつ、まっすぐ引き出しましょう。</p></div>
+  <div class="step"><span class="no">STEP 2</span><h3>角と印刷面を触らない</h3><p>持つのは縁の中央あたり。角をつまむと白欠けのもとになり、印刷面のベタ触りは皮脂汚れのもとになります。</p></div>
+  <div class="step"><span class="no">STEP 3</span><h3>その場ですぐスリーブへ</h3><p>スリーブは先に用意しておくのがコツ。裸のまま台の上に置いたり、ポケットに入れたりする時間が一番危険です。</p></div>
+</div>
+<p class="note">アイカツ！アンコールのカードはミニサイズ（59×86mm）です。スリーブはミニサイズ用（遊戯王サイズ等と同寸）を選んでください。大きいスリーブでは中でずれて、かえって傷が増えます。</p>
+</section>
+
+<section id="price-impact">
+<h2>状態で買取価格はこう変わる</h2>
+<p>買取店の多くは、状態をランク分けして価格を決めています。下の図は、公開されている査定基準の一例（C-labo Online買取のポケモンカード向け基準）をもとに、「満額の買取価格がどれだけ残るか」を表したものです。</p>
+<div>
+  <div class="rank-row"><span class="rank-name">状態S（完美品）</span><div class="rank-bar"><div class="rank-fill" style="width:100%"></div></div><span class="rank-val">100%（満額）</span></div>
+  <div class="rank-row"><span class="rank-name">状態A</span><div class="rank-bar"><div class="rank-fill light" style="width:90%"></div><div class="rank-fill" style="width:70%"></div></div><span class="rank-val">70〜90%</span></div>
+  <div class="rank-row"><span class="rank-name">状態B</span><div class="rank-bar"><div class="rank-fill light" style="width:70%"></div><div class="rank-fill" style="width:50%"></div></div><span class="rank-val">50〜70%</span></div>
+  <div class="rank-row"><span class="rank-name">状態C</span><div class="rank-bar"><div class="rank-fill" style="width:50%"></div></div><span class="rank-val">50%以下</span></div>
+  <div class="rank-row"><span class="rank-name">状態D</span><div class="rank-bar"><div class="rank-fill" style="width:20%"></div></div><span class="rank-val">20%以下〜買取不可</span></div>
+</div>
+<ul class="plain">
+  <li>状態Aの定義には「製造上のごく僅かなダメージ（初期傷）」も含まれます。使用傷がなくても、初期傷だけで満額にならない場合があります。</li>
+  <li>わずかな白欠け・スレは状態B、明らかなものは状態Cというのが同基準の目安です。</li>
+  <li>別の買取サービスの目安でも、白欠け・傷・スレは約30%〜の減額、折れ・大きな反りは約50%〜、破れ・水濡れ・日焼けは約90%〜とされています。</li>
+</ul>
+<p class="note">下げ幅は店舗・カード・時期によって異なります。あくまで一般的な目安としてご覧ください。売るときの手取りは<a href="collection.html#netcalc">手取り計算</a>で、手持ちカードの合計額は<a href="collection.html">資産額チェッカー</a>で確認できます（相場は状態の良いカードを前提とした売却実績の平均です）。</p>
+</section>
+
+<section id="storage">
+<h2>保管の基本</h2>
+<p>保護は「重ねる」ほど強くなります。大切なカードほど、層を増やしてください。</p>
+<div class="layers">
+  <div class="layer"><b>カード</b><span>排出直後が勝負</span></div>
+  <span class="arrow">→</span>
+  <div class="layer"><b>インナースリーブ</b><span>ぴったり・薄手</span></div>
+  <span class="arrow">→</span>
+  <div class="layer"><b>レギュラースリーブ</b><span>プレイ用はこれも</span></div>
+  <span class="arrow">→</span>
+  <div class="layer"><b>トップローダー／バインダー</b><span>硬質ケースやファイルへ</span></div>
+</div>
+<div class="env-grid">
+  <div class="env-card"><span class="icon">☀️</span><b>直射日光を避ける</b><span>紫外線で印刷が色あせます</span></div>
+  <div class="env-card"><span class="icon">💧</span><b>高温多湿を避ける</b><span>湿気は反りとカビのもと</span></div>
+  <div class="env-card"><span class="icon">🗜️</span><b>圧迫しない</b><span>重ね置き・輪ゴムは厳禁</span></div>
+  <div class="env-card"><span class="icon">🌡️</span><b>温度変化を避ける</b><span>結露は水濡れと同じダメージ</span></div>
+</div>
+<ul class="plain">
+  <li>バインダーは、出し入れで縁を引っかけないよう、1ポケット1枚が基本です。きついポケットへの詰め込みは白欠けのもとになります。</li>
+  <li>トップローダー（硬質ケース）に入れるときも、必ずスリーブを着けてから。裸で入れると出し入れの摩擦でスレが入ります。</li>
+  <li>長期保管では、乾燥剤と一緒に密閉できるケースへ。車の中や窓際は温度と湿度の変化が大きく不向きです。</li>
+</ul>
+</section>
+
+<section id="ng">
+<h2>やりがちNG集</h2>
+<div class="ng-grid">
+  <div class="ng-card"><p class="bad">NG：裸のままポケットやカバンの小物入れへ</p><p class="good">OK：スリーブ＋ケースに入れてから持ち歩く</p></div>
+  <div class="ng-card"><p class="bad">NG：輪ゴムやクリップで束ねる</p><p class="good">OK：スリーブごとケースやバインダーで管理する</p></div>
+  <div class="ng-card"><p class="bad">NG：机や筐体の上に直置きして滑らせる</p><p class="good">OK：置くときも持ち上げて、プレイマットやスリーブの上で扱う</p></div>
+  <div class="ng-card"><p class="bad">NG：飲み物のそばで広げる</p><p class="good">OK：飲食とカードの場所を分ける（水濡れは買取不可級の傷）</p></div>
+  <div class="ng-card"><p class="bad">NG：大きなサイズのスリーブで代用する</p><p class="good">OK：ミニサイズ（59×86mm）用のスリーブを使う</p></div>
+  <div class="ng-card"><p class="bad">NG：汚れたらティッシュで強く拭く</p><p class="good">OK：乾いた柔らかい布で軽く拭く程度に（強く擦るとスレが増える）</p></div>
+</div>
+<p class="note">このガイドは一般的なトレーディングカードの取り扱い・買取査定の考え方をもとに、当サイトがまとめたものです。査定基準の出典：C-labo Online買取の公開査定基準および買取サービスの減額目安（2026年11月に確認）。店舗ごとの最新基準は各店舗でご確認ください。</p>
+</section>
+
+<p><a href="index.html">トップページへ戻る</a></p>
+
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('sw.js').catch(function () {});
+  });
+}
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "83d44852b7134fafa72f79f48e3f3325"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

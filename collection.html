@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>コレクション資産額チェッカー・手取り計算｜アイカツ！アンコール 相場・設置店ガイド</title>
+<meta name="description" content="手持ちのアイカツ！アンコールカードの相場合計額を端末の中だけで計算できるチェッカーと、メルカリ・楽天ラクマで売った場合の手取り計算ツールです。">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#d6336c">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="アイカツ相場">
+<style>
+.ck-row { display: flex; align-items: center; gap: 10px; padding: 10px 4px; border-bottom: 1px solid var(--line); }
+.ck-info { flex: 1 1 auto; min-width: 0; }
+.ck-name { font-weight: 700; }
+.ck-meta { color: var(--muted); font-size: 0.85em; }
+.ck-price { font-weight: 700; color: var(--accent); white-space: nowrap; }
+.ck-qty { display: flex; align-items: center; gap: 6px; }
+.ck-btn { width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--accent); background: #fff; color: var(--accent); font-size: 20px; font-weight: 700; line-height: 1; cursor: pointer; }
+.ck-btn:active { background: var(--accent); color: #fff; }
+.ck-count { min-width: 2em; text-align: center; font-weight: 700; font-size: 1.05em; }
+.ck-summary { position: sticky; bottom: 0; background: var(--accent); color: #fff; border-radius: 14px; padding: 14px 18px; margin: 16px 0; display: flex; flex-wrap: wrap; gap: 6px 20px; align-items: baseline; box-shadow: 0 4px 16px rgba(0,0,0,0.18); }
+.ck-summary .total { font-size: 1.5em; font-weight: 800; }
+.ck-reset { background: #fff; color: var(--accent); border: none; border-radius: 999px; padding: 8px 16px; font-weight: 700; cursor: pointer; }
+.ck-search { width: 100%; box-sizing: border-box; padding: 12px 14px; border: 2px solid var(--line); border-radius: 10px; font-size: 1em; margin: 8px 0 4px; }
+.calc-grid { display: grid; gap: 12px; max-width: 520px; }
+.calc-grid label { font-weight: 700; display: block; margin-bottom: 4px; }
+.calc-grid input, .calc-grid select { width: 100%; box-sizing: border-box; padding: 12px 14px; border: 2px solid var(--line); border-radius: 10px; font-size: 1.05em; background: #fff; }
+.calc-result { background: var(--accent-soft); border: 2px solid var(--line); border-radius: 14px; padding: 16px 18px; max-width: 520px; }
+.calc-result .net { font-size: 1.7em; font-weight: 800; color: var(--accent); }
+.calc-result table { width: 100%; }
+.calc-apply { background: var(--accent); color: #fff; border: none; border-radius: 999px; padding: 10px 18px; font-weight: 700; cursor: pointer; margin-top: 8px; }
+</style>
+</head>
+<body>
+<header class="site-header">
+<h1>コレクション資産額チェッカー</h1>
+<p>手持ちカードの相場合計と、売ったときの手取りを計算できます</p>
+</header>
+<div class="wrap">
+
+<p><a href="index.html">トップページへ戻る</a></p>
+
+<section id="checker">
+<h2>資産額チェッカー</h2>
+<p>手持ちのカードを選んで枚数を入れると、現在の相場（売却済み単品の平均）での合計額が分かります。<strong>選んだ内容はこの端末の中だけに保存され、外部に送信されることはありません。</strong></p>
+<p class="note">対象は、相場が確認できたカード（現在22種）のみです。対象カードは相場の集計に合わせて順次追加します。価格は平均値で目安であり、実際の売買価格を保証するものではありません。実績が1〜2件のカードは「参考値」と表示しています。相場データ：2026年11月23日時点（<a href="index.html#allprices">全カード相場一覧</a>と同じ集計）。</p>
+<input class="ck-search" id="ckSearch" type="search" placeholder="カード名・番号で探す（例：オデット、E1-30）">
+<div id="ckList"></div>
+<div class="ck-summary">
+  <span>合計 <span class="total" id="ckTotal">¥0</span></span>
+  <span id="ckCount">0種・0枚</span>
+  <button class="ck-reset" id="ckReset" type="button">リセット</button>
+</div>
+</section>
+
+<section id="netcalc">
+<h2>手取り計算（売った場合）</h2>
+<p>メルカリ・楽天ラクマで「送料込み」で売った場合に、手元に残る金額の目安を計算します。手数料は送料を含めた販売価格全体にかかります。</p>
+<div class="calc-grid">
+  <div>
+    <label for="ncPrice">販売価格（円）</label>
+    <input id="ncPrice" type="number" inputmode="numeric" min="0" placeholder="例：38472">
+    <button class="calc-apply" id="ncApply" type="button">チェッカーの合計額を入れる（まとめて1件で売る場合）</button>
+  </div>
+  <div>
+    <label for="ncSite">販売サイト</label>
+    <select id="ncSite">
+      <option value="mercari">メルカリ（手数料10%）</option>
+      <option value="rakuma">楽天ラクマ（手数料は料率による）</option>
+    </select>
+  </div>
+  <div id="ncRateWrap" hidden>
+    <label for="ncRate">ラクマの販売手数料率</label>
+    <select id="ncRate">
+      <option value="10" selected>10%（初めての方・実績なし）</option>
+      <option value="9">9%</option>
+      <option value="8">8%</option>
+      <option value="7">7%</option>
+      <option value="6">6%</option>
+      <option value="4.5">4.5%（前月の実績が大きい方）</option>
+    </select>
+  </div>
+  <div>
+    <label for="ncShip">配送方法</label>
+    <select id="ncShip"></select>
+  </div>
+  <div id="ncShipCustomWrap" hidden>
+    <label for="ncShipCustom">送料（円・手入力）</label>
+    <input id="ncShipCustom" type="number" inputmode="numeric" min="0" placeholder="送料を入力">
+  </div>
+</div>
+<div class="calc-result">
+  <div>手取りの目安 <span class="net" id="ncNet">―</span></div>
+  <table>
+    <tbody>
+    <tr><th>販売手数料</th><td id="ncFee">―</td></tr>
+    <tr><th>送料</th><td id="ncShipOut">―</td></tr>
+    </tbody>
+  </table>
+</div>
+<p class="note">手数料・送料は2026年11月に各公式ガイドで確認した内容です（メルカリ：販売手数料10%、らくらくメルカリ便ネコポス210円など／ラクマ：販売手数料は前月の実績で10%〜4.5%、かんたんラクマパックの料金）。売上金を銀行口座へ振り込む際は、別途振込手数料がかかります（メルカリ200円/回、ラクマ210円/回・楽天銀行で1万円以上の申請時は無料）。料金は変更されることがあるため、出品前に各アプリでご確認ください。</p>
+</section>
+
+<p><a href="index.html">トップページへ戻る</a></p>
+
+</div>
+<script>
+var PRICE_DATA = [
+  {code:'E1-30', name:'オデットスワン', rarity:'ER', ver:'パラレル', price:38472, count:6},
+  {code:'E1-04', name:'オーロラキスリボン', rarity:'PR', ver:'パラレル', price:12277, count:2},
+  {code:'E1-01', name:'オーロラキスキャミソール', rarity:'PR', ver:'パラレル', price:11266, count:3},
+  {code:'E1-02', name:'オーロラキスドレープスカート', rarity:'PR', ver:'パラレル', price:11100, count:1},
+  {code:'E1-03', name:'オーロラキスバレエシューズ', rarity:'PR', ver:'パラレル', price:9250, count:2},
+  {code:'E1-50', name:'ドリームエミネンス', rarity:'ER', ver:'パラレル', price:7163, count:6},
+  {code:'E1-32', name:'オーロラペガサス', rarity:'ER', ver:'パラレル', price:6998, count:5},
+  {code:'E1-31', name:'リルリボンストーリー', rarity:'ER', ver:'パラレル', price:6950, count:4},
+  {code:'E1-33', name:'天の川コズミックワンショルダー', rarity:'PR', ver:'パラレル', price:5212, count:2},
+  {code:'E1-36', name:'天の川コズミックカチューシャ', rarity:'PR', ver:'パラレル', price:5013, count:4},
+  {code:'E1-35', name:'天の川コズミックブーツ', rarity:'PR', ver:'パラレル', price:4296, count:3},
+  {code:'E1-34', name:'天の川コズミックスカート', rarity:'PR', ver:'パラレル', price:3947, count:4},
+  {code:'E1-01', name:'オーロラキスキャミソール', rarity:'PR', ver:'通常', price:2400, count:1},
+  {code:'E1-04', name:'オーロラキスリボン', rarity:'PR', ver:'通常', price:2350, count:2},
+  {code:'E1-03', name:'オーロラキスバレエシューズ', rarity:'PR', ver:'通常', price:1900, count:1},
+  {code:'E1-30', name:'オデットスワン', rarity:'ER', ver:'通常', price:1300, count:1},
+  {code:'E1-32', name:'オーロラペガサス', rarity:'ER', ver:'通常', price:1249, count:2},
+  {code:'EP-030', name:'スターライト学園ブーツ', rarity:'プロモ', ver:'', price:1005, count:2},
+  {code:'EP-029', name:'スターライト学園制服', rarity:'プロモ', ver:'', price:777, count:1},
+  {code:'E1-52', name:'レジェンダリールージュパンプス', rarity:'PR', ver:'通常', price:689, count:2},
+  {code:'EP-002', name:'レジェンダリールージュティアラ', rarity:'プロモ', ver:'', price:679, count:1},
+  {code:'E1-50', name:'ドリームエミネンス', rarity:'ER', ver:'通常', price:599, count:1}
+];
+function yen(n) { return '¥' + n.toLocaleString('ja-JP'); }
+function keyOf(c) { return c.code + '|' + c.ver; }
+
+var LS_KEY = 'aikatsu-collection-v1';
+var held = {};
+try { held = JSON.parse(localStorage.getItem(LS_KEY) || '{}') || {}; } catch (e) { held = {}; }
+
+var listEl = document.getElementById('ckList');
+var rows = [];
+PRICE_DATA.forEach(function (c, i) {
+  var row = document.createElement('div');
+  row.className = 'ck-row';
+  var verLabel = c.ver ? c.ver + '版' : '';
+  var ref = c.count <= 2 ? '・参考値' : '';
+  row.innerHTML =
+    '<div class="ck-info"><div class="ck-name"></div>' +
+    '<div class="ck-meta">' + c.code + '｜' + c.rarity + (verLabel ? '｜' + verLabel : '') + '｜実績' + c.count + '件' + ref + '</div></div>' +
+    '<div class="ck-price">' + yen(c.price) + '</div>' +
+    '<div class="ck-qty"><button class="ck-btn" type="button" aria-label="減らす">−</button>' +
+    '<span class="ck-count">0</span>' +
+    '<button class="ck-btn" type="button" aria-label="増やす">＋</button></div>';
+  row.querySelector('.ck-name').textContent = c.name;
+  var countEl = row.querySelector('.ck-count');
+  var btns = row.querySelectorAll('.ck-btn');
+  function sync() { countEl.textContent = held[keyOf(c)] || 0; }
+  btns[0].addEventListener('click', function () {
+    var k = keyOf(c); var v = Math.max(0, (held[k] || 0) - 1);
+    if (v === 0) { delete held[k]; } else { held[k] = v; }
+    save(); sync(); totals();
+  });
+  btns[1].addEventListener('click', function () {
+    var k = keyOf(c); held[k] = Math.min(999, (held[k] || 0) + 1);
+    save(); sync(); totals();
+  });
+  sync();
+  listEl.appendChild(row);
+  rows.push({ el: row, card: c });
+});
+function save() { try { localStorage.setItem(LS_KEY, JSON.stringify(held)); } catch (e) {} }
+function totals() {
+  var sum = 0, kinds = 0, sheets = 0;
+  PRICE_DATA.forEach(function (c) {
+    var q = held[keyOf(c)] || 0;
+    if (q > 0) { sum += c.price * q; kinds++; sheets += q; }
+  });
+  document.getElementById('ckTotal').textContent = yen(sum);
+  document.getElementById('ckCount').textContent = kinds + '種・' + sheets + '枚';
+  return sum;
+}
+document.getElementById('ckReset').addEventListener('click', function () {
+  held = {}; save();
+  rows.forEach(function (r) { r.el.querySelector('.ck-count').textContent = '0'; });
+  totals();
+});
+document.getElementById('ckSearch').addEventListener('input', function (e) {
+  var q = e.target.value.trim().toLowerCase();
+  rows.forEach(function (r) {
+    var hit = !q || r.card.name.toLowerCase().indexOf(q) !== -1 || r.card.code.toLowerCase().indexOf(q) !== -1;
+    r.el.style.display = hit ? '' : 'none';
+  });
+});
+totals();
+
+var SHIP = {
+  mercari: [
+    { label: 'らくらくメルカリ便 ネコポス（¥210）', fee: 210 },
+    { label: 'ゆうパケットポストmini（¥160）', fee: 160 },
+    { label: '送料別・購入者負担（¥0）', fee: 0 },
+    { label: 'その他（手入力）', fee: -1 }
+  ],
+  rakuma: [
+    { label: 'かんたんラクマパック ゆうパケットポストmini（¥150）', fee: 150 },
+    { label: 'かんたんラクマパック ゆうパケットポスト（¥175）', fee: 175 },
+    { label: 'かんたんラクマパック ゆうパケット（¥200）', fee: 200 },
+    { label: 'かんたんラクマパック ネコポス（¥200）', fee: 200 },
+    { label: '送料別・購入者負担（¥0）', fee: 0 },
+    { label: 'その他（手入力）', fee: -1 }
+  ]
+};
+var ncPrice = document.getElementById('ncPrice');
+var ncSite = document.getElementById('ncSite');
+var ncRate = document.getElementById('ncRate');
+var ncRateWrap = document.getElementById('ncRateWrap');
+var ncShip = document.getElementById('ncShip');
+var ncShipCustom = document.getElementById('ncShipCustom');
+var ncShipCustomWrap = document.getElementById('ncShipCustomWrap');
+function fillShip() {
+  ncShip.innerHTML = '';
+  SHIP[ncSite.value].forEach(function (s, i) {
+    var o = document.createElement('option');
+    o.value = i; o.textContent = s.label;
+    ncShip.appendChild(o);
+  });
+  shipCustomToggle(); calc();
+}
+function shipFee() {
+  var s = SHIP[ncSite.value][Number(ncShip.value)];
+  if (!s) return 0;
+  if (s.fee === -1) return Math.max(0, Number(ncShipCustom.value) || 0);
+  return s.fee;
+}
+function shipCustomToggle() {
+  var s = SHIP[ncSite.value][Number(ncShip.value)];
+  ncShipCustomWrap.hidden = !(s && s.fee === -1);
+}
+function calc() {
+  var price = Number(ncPrice.value) || 0;
+  var rate = ncSite.value === 'mercari' ? 10 : Number(ncRate.value);
+  var fee = Math.floor(price * rate / 100);
+  var ship = shipFee();
+  ncRateWrap.hidden = ncSite.value !== 'rakuma';
+  if (price <= 0) {
+    document.getElementById('ncNet').textContent = '―';
+    document.getElementById('ncFee').textContent = '―';
+    document.getElementById('ncShipOut').textContent = '―';
+    return;
+  }
+  document.getElementById('ncNet').textContent = yen(price - fee - ship);
+  document.getElementById('ncFee').textContent = yen(fee) + '（' + rate + '%）';
+  document.getElementById('ncShipOut').textContent = yen(ship);
+}
+ncSite.addEventListener('change', fillShip);
+ncShip.addEventListener('change', function () { shipCustomToggle(); calc(); });
+[ncPrice, ncRate, ncShipCustom].forEach(function (el) { el.addEventListener('input', calc); });
+document.getElementById('ncApply').addEventListener('click', function () {
+  var sum = totals();
+  if (sum > 0) { ncPrice.value = sum; calc(); }
+});
+fillShip();
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('sw.js').catch(function () {});
+  });
+}
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "83d44852b7134fafa72f79f48e3f3325"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

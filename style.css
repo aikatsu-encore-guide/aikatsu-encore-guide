@@ -50,11 +50,11 @@ a { color: var(--accent); }
 }
 .site-header h1 {
   margin: 0 0 10px;
-  font-size: clamp(0.95rem, 4.4vw, 1.35rem);
+  font-size: clamp(0.8rem, 4.1vw, 1.35rem);
   line-height: 1.45;
   white-space: nowrap;
   font-family: "Hiragino Mincho ProN", "Hiragino Mincho", "Yu Mincho", YuMincho, serif;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
   position: relative;
   z-index: 1;
 }
@@ -536,10 +536,10 @@ details.store-pref[open] { background: #fdf6f3; }
   margin-right: 4px;
 }
 @media (max-width: 600px) {
-  .tile { border-radius: 4px; }
-  .tile-name { font-size: 0.52rem; }
-  .tile-count { font-size: 0.62rem; }
-  .tilemap { gap: 3px; }
+  .tile { border-radius: 4px; min-width: 0; }
+  .tile-name { font-size: clamp(0.4rem, 2.1vw, 0.52rem); letter-spacing: -0.02em; }
+  .tile-count { font-size: clamp(0.5rem, 2.9vw, 0.62rem); }
+  .tilemap { gap: 2px; }
 }
 
 /* グラフ強化（2026-11-23追加）：1位の大グラフとトップ10表のミニグラフ */

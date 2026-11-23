@@ -2112,6 +2112,11 @@ var PRICE_HISTORY = [
       row.insertBefore(td, row.children[row.children.length - 1]);
     });
   }
+  // ---- 全カード相場表：注記が「―」のセルに印を付ける（スマホのカード表示で隠す） ----
+  Array.prototype.forEach.call(document.querySelectorAll('.allprice-table tbody tr'), function (row) {
+    var n = row.children[7];
+    if (n && n.textContent.trim() === '―') { n.classList.add('note-none'); }
+  });
   // ---- カード別グラフ（グリッド、面グラフ化） ----
   var grid = document.getElementById('chart-grid');
   if (grid) {

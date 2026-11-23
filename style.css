@@ -388,3 +388,10 @@ details.store-pref[open] { background: #fffafc; }
 .feature-chart svg { width: 100%; height: auto; display: block; }
 td.spark { min-width: 104px; }
 td.spark svg { display: block; }
+
+/* 最新情報（公式お知らせ）欄（2026-11-23追加） */
+.news-section { border: 2px solid var(--accent); }
+.news-list { list-style: none; margin: 6px 0 0; padding: 0; }
+.news-list li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; padding: 8px 0; border-bottom: 1px dashed var(--line); }
+.news-list li:last-child { border-bottom: none; padding-bottom: 2px; }
+.news-date { color: var(--muted); font-size: 0.85rem; font-weight: 700; white-space: nowrap; }

@@ -163,6 +163,64 @@ p { margin: 8px 0; }
   #prices .table-scroll td:last-child { order: 12; margin-left: auto; font-size: .78rem; }
   #prices .table-scroll td.note-none { display: none; }
 }
+/* ===== その他の表もスマホではカード表示にする ===== */
+@media (max-width: 760px) {
+  table { min-width: 0; }
+  .table-scroll { overflow-x: visible; }
+  .table-scroll table { min-width: 0; border-collapse: separate; border-spacing: 0; }
+  .table-scroll thead { display: none; }
+  .table-scroll td.note-none { display: none; }
+  #allprices .table-scroll tbody tr,
+  #promo .table-scroll tbody tr,
+  .card-table tbody tr {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 6px;
+    row-gap: 2px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface);
+    box-shadow: 0 2px 6px rgba(163, 74, 109, .08);
+    padding: 9px 13px 8px;
+    margin-bottom: 8px;
+  }
+  #allprices .table-scroll td,
+  #promo .table-scroll td,
+  .card-table td { border: none; padding: 0; background: transparent; }
+  /* 全カード相場 */
+  #allprices .table-scroll td:nth-child(2) { order: 1; flex: 1 1 auto; font-weight: 700; font-size: 1.02rem; }
+  #allprices .table-scroll td:nth-child(3) { order: 2; }
+  #allprices .table-scroll td:nth-child(6) { order: 3; flex: 1 1 55%; font-size: 1.25rem; color: var(--accent-deep); text-align: left; }
+  #allprices .table-scroll td:nth-child(1) { order: 4; color: var(--muted); font-size: .76rem; }
+  #allprices .table-scroll td:nth-child(4) { order: 5; color: var(--muted); font-size: .76rem; }
+  #allprices .table-scroll td:nth-child(4)::before { content: "・"; }
+  #allprices .table-scroll td:nth-child(5) { order: 6; color: var(--muted); font-size: .76rem; }
+  #allprices .table-scroll td:nth-child(5)::before { content: "・"; }
+  #allprices .table-scroll td:nth-child(7) { order: 7; color: var(--muted); font-size: .76rem; }
+  #allprices .table-scroll td:nth-child(7)::before { content: "・"; }
+  #allprices .table-scroll td:nth-child(8) { order: 8; color: #8a6d1a; font-size: .76rem; }
+  #allprices .table-scroll td:nth-child(8)::before { content: "・"; }
+  #allprices .table-scroll td:nth-child(9) { order: 9; margin-left: auto; font-size: .78rem; }
+  /* プロモ情報 */
+  #promo .table-scroll td:nth-child(1) { order: 1; color: var(--muted); font-size: .8rem; }
+  #promo .table-scroll td:nth-child(2) { order: 2; flex: 1 1 auto; font-weight: 700; font-size: 1rem; }
+  #promo .table-scroll td:nth-child(3) { order: 3; flex-basis: 100%; font-size: .88rem; }
+  #promo .table-scroll td:nth-child(4) { order: 4; color: var(--muted); font-size: .78rem; }
+  #promo .table-scroll td:nth-child(5) { order: 5; color: var(--muted); font-size: .78rem; }
+  #promo .table-scroll td:nth-child(5)::before { content: "・"; }
+  /* カードリスト（cards.html） */
+  .card-table td:nth-child(2) { order: 1; flex: 1 1 auto; font-weight: 700; font-size: 1rem; }
+  .card-table td:nth-child(3) { order: 2; }
+  .card-table td:nth-child(1) { order: 3; color: var(--muted); font-size: .76rem; }
+  .card-table td:nth-child(4) { order: 4; color: var(--muted); font-size: .76rem; }
+  .card-table td:nth-child(4)::before { content: "・"; }
+  .card-table td:nth-child(5) { order: 5; color: var(--muted); font-size: .76rem; }
+  .card-table td:nth-child(5)::before { content: "・"; }
+  .card-table td:nth-child(6) { order: 6; color: var(--muted); font-size: .76rem; }
+  .card-table td:nth-child(6)::before { content: "・"; }
+  .card-table td:nth-child(7) { order: 7; margin-left: auto; font-size: .78rem; }
+}
 table {
   border-collapse: collapse;
   width: 100%;

@@ -49,11 +49,23 @@ a { color: var(--accent); }
   opacity: 0.5;
 }
 .site-header h1 {
-  margin: 0 0 6px;
+  margin: 0 0 10px;
   font-size: 1.35rem;
-  line-height: 1.4;
+  line-height: 1.45;
   font-family: "Hiragino Mincho ProN", "Hiragino Mincho", "Yu Mincho", YuMincho, serif;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
+  position: relative;
+  z-index: 1;
+}
+.site-header p.site-tag {
+  display: inline-block;
+  border: 1px solid rgba(255, 255, 255, .65);
+  border-radius: 999px;
+  padding: 2px 14px;
+  font-size: .78rem;
+  letter-spacing: .14em;
+  opacity: 1;
+  margin: 0;
   position: relative;
   z-index: 1;
 }

@@ -144,7 +144,7 @@ p { margin: 8px 0; }
   #prices .table-scroll td { border: none; padding: 0; background: transparent; }
   #prices .table-scroll .rank-badge { width: 2.1em; height: 2.1em; box-shadow: 0 2px 5px rgba(0, 0, 0, .15); }
   #prices .table-scroll td:nth-child(1) { order: 1; }
-  #prices .table-scroll td:nth-child(3) { order: 2; flex: 1 1 auto; font-weight: 700; font-size: .95rem; }
+  #prices .table-scroll td:nth-child(3) { order: 2; flex: 1 1 auto; min-width: 0; font-weight: 700; font-size: .88rem; }
   #prices .table-scroll td:nth-child(4) { order: 3; }
   #prices .table-scroll td:nth-child(6) { order: 4; flex: 1 0 calc(100% - 122px); font-size: 1.3rem; color: var(--accent-deep); text-align: left; }
   #prices .table-scroll td.spark { order: 5; margin-left: auto; background: #fdf6f3; border-radius: 8px; padding: 2px 6px; line-height: 0; }
@@ -614,8 +614,8 @@ td.spark svg { display: block; }
   width: auto;
   z-index: 1;
 }
-.site-header p { max-width: calc(100% - 148px); }
-.site-header::after { right: 156px; }
+.site-header.has-mao p { max-width: calc(100% - 148px); }
+.site-header.has-mao::after { right: 156px; }
 .site-header p.site-tag {
   white-space: nowrap;
   font-size: .66rem;

@@ -144,7 +144,7 @@ p { margin: 8px 0; }
   #prices .table-scroll td { border: none; padding: 0; background: transparent; }
   #prices .table-scroll .rank-badge { width: 2.1em; height: 2.1em; box-shadow: 0 2px 5px rgba(0, 0, 0, .15); }
   #prices .table-scroll td:nth-child(1) { order: 1; }
-  #prices .table-scroll td:nth-child(3) { order: 2; flex: 1 1 auto; font-weight: 700; font-size: 1.05rem; }
+  #prices .table-scroll td:nth-child(3) { order: 2; flex: 1 1 auto; font-weight: 700; font-size: .95rem; }
   #prices .table-scroll td:nth-child(4) { order: 3; }
   #prices .table-scroll td:nth-child(6) { order: 4; flex: 1 0 calc(100% - 122px); font-size: 1.3rem; color: var(--accent-deep); text-align: left; }
   #prices .table-scroll td.spark { order: 5; margin-left: auto; background: #fdf6f3; border-radius: 8px; padding: 2px 6px; line-height: 0; }
@@ -160,7 +160,7 @@ p { margin: 8px 0; }
   #prices .table-scroll td:nth-child(9)::before { content: "・順位 "; color: var(--muted); font-size: .72rem; }
   #prices .table-scroll td:nth-child(10) { order: 11; color: #8a6d1a; font-size: .76rem; }
   #prices .table-scroll td:nth-child(10)::before { content: "・"; }
-  #prices .table-scroll td:nth-child(11) { order: 12; margin-left: auto; font-size: .78rem; }
+  #prices .table-scroll td:nth-child(11) { order: 12; margin-left: auto; font-size: .78rem; flex-basis: 100%; text-align: right; }
   #prices .table-scroll td.note-none { display: none; }
 }
 /* ===== その他の表もスマホではカード表示にする ===== */
@@ -425,7 +425,7 @@ td.change-none { color: var(--muted); white-space: nowrap; }
   text-decoration: none;
   box-shadow: 0 4px 14px rgba(163, 74, 109, .28);
 }
-.asset-banner .ab-title { display: block; font-size: 1.18rem; font-weight: 700; line-height: 1.45; }
+.asset-banner .ab-title { display: block; font-size: clamp(.88rem, 4.3vw, 1.18rem); font-weight: 700; line-height: 1.45; white-space: nowrap; }
 .asset-banner .ab-text { display: block; margin-top: 6px; font-size: .92rem; line-height: 1.6; color: rgba(255, 255, 255, .92); }
 .asset-banner .ab-btn {
   display: inline-block;

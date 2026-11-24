@@ -604,3 +604,64 @@ td.spark svg { display: block; }
 .news-list li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; padding: 8px 0; border-bottom: 1px dashed var(--line); }
 .news-list li:last-child { border-bottom: none; padding-bottom: 2px; }
 .news-date { color: var(--muted); font-size: 0.85rem; font-weight: 700; white-space: nowrap; }
+
+/* ===== マスコットMao（ダイカット配置） ===== */
+.site-header .mao-head {
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+  height: 92px;
+  width: auto;
+  pointer-events: none;
+}
+.site-header p { max-width: calc(100% - 92px); }
+.site-header::after { right: 112px; }
+.asset-banner { position: relative; padding-right: 118px; }
+.asset-banner .mao-banner {
+  position: absolute;
+  right: 8px;
+  bottom: 0;
+  height: 108px;
+  width: auto;
+  pointer-events: none;
+}
+@media (max-width: 380px) {
+  .asset-banner { padding-right: 98px; }
+  .asset-banner .mao-banner { height: 92px; }
+}
+.mao-intro {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 14px 0 4px;
+  padding: 10px 16px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  text-decoration: none;
+  color: var(--ink);
+  box-shadow: 0 2px 8px rgba(163, 74, 109, .08);
+}
+.mao-intro img { height: 76px; width: auto; flex: none; }
+.mao-intro .mi-title { display: block; font-weight: 700; font-size: 1rem; }
+.mao-intro .mi-text { display: block; margin-top: 3px; font-size: .88rem; line-height: 1.55; color: var(--muted); }
+.mao-intro:active { transform: scale(.98); }
+.mao-note {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 14px 0;
+  padding: 10px 16px;
+  background: var(--accent-soft);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+.mao-note img { height: 76px; width: auto; flex: none; }
+.mao-note p { margin: 0; font-size: .92rem; line-height: 1.6; }
+.lead-box.has-mao { display: flex; align-items: center; gap: 14px; }
+.lead-box.has-mao img { height: 84px; width: auto; flex: none; }
+.lead-box.has-mao p { margin: 0; }
+.mao-about { display: flex; gap: 18px; align-items: flex-start; margin: 12px 0; }
+.mao-about img { height: 210px; width: auto; flex: none; }
+.mao-about p { margin: 0 0 8px; }
+@media (max-width: 560px) { .mao-about img { height: 160px; } }

@@ -7,6 +7,7 @@ var PRECACHE = [
   './',
   './cards',
   './collection',
+  './ship',
   './care',
   './promo',
   './stores',

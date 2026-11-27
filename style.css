@@ -26,7 +26,7 @@ body {
 }
 a { color: var(--accent); }
 .site-header {
-  background: linear-gradient(120deg, var(--accent-deep), var(--accent) 55%, #d18aa5);
+  background: #c05a7f;
   color: #fff;
   padding: 26px 16px 20px;
   position: relative;
@@ -642,10 +642,6 @@ td.spark svg { display: block; }
   height: 138px;
   width: auto;
   z-index: 1;
-  -webkit-mask-image: linear-gradient(to right, transparent 0, rgba(0,0,0,.35) 4%, rgba(0,0,0,.75) 7%, #000 10.5%, #000 93.5%, rgba(0,0,0,.75) 96.5%, rgba(0,0,0,.35) 98.7%, transparent 100%), linear-gradient(to bottom, transparent 0, rgba(0,0,0,.45) 2%, rgba(0,0,0,.8) 3.2%, #000 5%, #000 100%);
-  -webkit-mask-composite: source-in;
-  mask-image: linear-gradient(to right, transparent 0, rgba(0,0,0,.35) 4%, rgba(0,0,0,.75) 7%, #000 10.5%, #000 93.5%, rgba(0,0,0,.75) 96.5%, rgba(0,0,0,.35) 98.7%, transparent 100%), linear-gradient(to bottom, transparent 0, rgba(0,0,0,.45) 2%, rgba(0,0,0,.8) 3.2%, #000 5%, #000 100%);
-  mask-composite: intersect;
 }
 .site-header.has-mao p { max-width: calc(100% - 178px); }
 .site-header.has-mao::after { right: 184px; }

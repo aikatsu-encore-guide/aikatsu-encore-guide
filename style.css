@@ -442,6 +442,31 @@ td.change-none { color: var(--muted); white-space: nowrap; }
   font-size: .92rem;
 }
 .asset-banner:active { transform: scale(.98); filter: brightness(.97); }
+/* ===== トップ10合計ライン（トップページ・トップ10直下） ===== */
+.top10-total {
+  display: block;
+  margin: 14px 0 4px;
+  padding: 16px 20px 14px;
+  border-radius: 16px;
+  background: var(--accent-soft);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+}
+.top10-total .tt-title { display: block; font-size: 1.02rem; font-weight: 700; line-height: 1.5; }
+.top10-total .tt-title strong { color: var(--accent-deep); }
+.top10-total .tt-text { display: block; margin-top: 5px; font-size: .9rem; line-height: 1.6; color: var(--muted); }
+.top10-total .tt-btn {
+  display: inline-block;
+  margin-top: 11px;
+  padding: 7px 18px;
+  border-radius: 999px;
+  background: var(--accent-deep);
+  color: #fff;
+  font-weight: 700;
+  font-size: .92rem;
+}
+.top10-total:active { transform: scale(.98); filter: brightness(.97); }
 /* ===== リード文ボックス（資産チェックページ冒頭） ===== */
 .lead-box {
   margin: 14px 0 6px;

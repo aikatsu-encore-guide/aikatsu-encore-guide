@@ -643,8 +643,8 @@ td.spark svg { display: block; }
   width: auto;
   z-index: 1;
 }
-.site-header.has-mao p { max-width: calc(100% - 148px); }
-.site-header.has-mao::after { right: 156px; }
+.site-header.has-mao p { max-width: calc(100% - 178px); }
+.site-header.has-mao::after { right: 184px; }
 .site-header p.site-tag {
   white-space: nowrap;
   font-size: .66rem;
